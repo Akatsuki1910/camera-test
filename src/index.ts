@@ -3,7 +3,7 @@ const cameraInitSmartphoneSupport = () => {
 
   const cameraSetting = {
     audio: false,
-    video: true,
+    video: { facingMode: { exact: 'environment' } },
   };
 
   navigator.mediaDevices.enumerateDevices().then((e) => {
