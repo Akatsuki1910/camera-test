@@ -28,6 +28,14 @@ const cameraInitSmartphoneSupport = () => {
     .getUserMedia(cameraSetting)
     .then((mediaStream) => {
       if (video) {
+        const d = document.getElementById('now') as HTMLDivElement;
+        let f = '';
+        if (d) {
+          f += '@@@@@@@@@@@@@@@\n';
+          f += mediaStream.id + '\n';
+          f += '@@@@@@@@@@@@@@@\n';
+          d.innerHTML = f;
+        }
         video.srcObject = mediaStream;
       }
     })
