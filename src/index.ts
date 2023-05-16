@@ -3,9 +3,7 @@ const cameraInitSmartphoneSupport = () => {
 
   const cameraSetting = {
     audio: false,
-    video: {
-      facingMode: 'environment',
-    },
+    video: true,
   };
 
   navigator.mediaDevices.enumerateDevices().then((e) => {
@@ -13,7 +11,14 @@ const cameraInitSmartphoneSupport = () => {
     let f = '';
     if (d) {
       for (const k of e) {
-        f += JSON.stringify(k.toJSON()) + '\n';
+        if (k.kind === 'videoinput') {
+          f += '##############\n';
+          f += `deviceId: ${k.deviceId}\n`;
+          f += `groupId: ${k.groupId}\n`;
+          f += `kind: ${k.kind}\n`;
+          f += `label: ${k.label}\n`;
+          f += '##############\n';
+        }
       }
     }
     d.innerText = f;
@@ -27,6 +32,9 @@ const cameraInitSmartphoneSupport = () => {
       }
     })
     .catch((err) => {
-      console.log(err.toString());
+      const d = document.getElementById('err') as HTMLDivElement;
+      if (d) {
+        d.innerHTML = err.toString();
+      }
     });
 };
