@@ -21,9 +21,12 @@ const cameraInitSmartphoneSupport = async () => {
     }
   }
   d.innerText = f;
+  let getD: MediaStream;
 
-  s.onchange = async (e) => {
-    let getD;
+  s.onchange = async () => {
+    getD.getTracks().forEach((track) => track.stop());
+    video.srcObject = null;
+
     try {
       getD = await navigator.mediaDevices.getUserMedia({
         audio: false,
@@ -45,7 +48,9 @@ const cameraInitSmartphoneSupport = async () => {
       //   f += '@@@@@@@@@@@@@@@\n';
       //   d.innerHTML = f;
       // }
+
       video.srcObject = getD;
+      video.onloadedmetadata = (e) => video.play();
     }
   };
   s.options[0].selected = true;
