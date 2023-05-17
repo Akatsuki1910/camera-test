@@ -24,7 +24,7 @@ const cameraInitSmartphoneSupport = async () => {
   let getD: MediaStream;
 
   s.onchange = async () => {
-    getD.getTracks().forEach((track) => track.stop());
+    // getD.getTracks().forEach((track) => track.stop());
     video.srcObject = null;
 
     try {
@@ -48,9 +48,8 @@ const cameraInitSmartphoneSupport = async () => {
       //   f += '@@@@@@@@@@@@@@@\n';
       //   d.innerHTML = f;
       // }
-
       video.srcObject = getD;
-      video.onloadedmetadata = (e) => video.play();
+      video.play();
     }
   };
   s.options[0].selected = true;
