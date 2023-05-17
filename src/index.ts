@@ -12,7 +12,6 @@ const cameraInitSmartphoneSupport = async () => {
         f += '##############\n';
         f += `deviceId: ${k.deviceId}\n`;
         f += `groupId: ${k.groupId}\n`;
-        f += `kind: ${k.kind}\n`;
         f += `label: ${k.label}\n`;
         f += '##############\n';
 
