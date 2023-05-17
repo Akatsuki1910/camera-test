@@ -21,36 +21,30 @@ const cameraInitSmartphoneSupport = async () => {
     }
   }
   d.innerText = f;
-  let getD: MediaStream;
+  let mem: MediaStream;
 
   s.onchange = async () => {
-    // getD.getTracks().forEach((track) => track.stop());
+    mem?.getTracks().forEach((track) => track.stop());
     video.srcObject = null;
 
-    try {
-      getD = await navigator.mediaDevices.getUserMedia({
+    navigator.mediaDevices
+      .getUserMedia({
         audio: false,
         video: { deviceId: this.value },
+      })
+      .then((v) => {
+        console.log(v);
+        if (video) {
+          mem = v;
+          video.srcObject = v;
+        }
+      })
+      .catch((err) => {
+        const d = document.getElementById('err') as HTMLDivElement;
+        if (d) {
+          d.innerHTML = err.toString();
+        }
       });
-    } catch (err) {
-      const d = document.getElementById('err') as HTMLDivElement;
-      if (d) {
-        d.innerHTML = err.toString();
-      }
-    }
-
-    if (video) {
-      // const d = document.getElementById('now') as HTMLDivElement;
-      // let f = '';
-      // if (d) {
-      //   f += '@@@@@@@@@@@@@@@\n';
-      //   f += getD + '\n';
-      //   f += '@@@@@@@@@@@@@@@\n';
-      //   d.innerHTML = f;
-      // }
-      video.srcObject = getD;
-      video.play();
-    }
   };
   s.options[0].selected = true;
   s.dispatchEvent(new Event('change'));
