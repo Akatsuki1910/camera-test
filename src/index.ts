@@ -30,10 +30,18 @@ const cameraInitSmartphoneSupport = async () => {
     navigator.mediaDevices
       .getUserMedia({
         audio: false,
-        video: { deviceId: this.value },
+        video: { deviceId: s.value },
       })
       .then((v) => {
-        console.log(v);
+        const d = document.getElementById('now') as HTMLDivElement;
+        let f = '';
+        if (d) {
+          f += '@@@\n';
+          f += s.value + '\n';
+          f += '@@@\n';
+          d.innerHTML = f;
+        }
+
         if (video) {
           mem = v;
           video.srcObject = v;
