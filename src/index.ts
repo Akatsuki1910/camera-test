@@ -29,7 +29,10 @@ const cameraInitSmartphoneSupport = async () => {
     navigator.mediaDevices
       .getUserMedia({
         audio: false,
-        video: { deviceId: s.value },
+        video: {
+          // deviceId: s.value,
+          facingMode:'user'
+        },
       })
       .then((v) => {
         const d = document.getElementById('now') as HTMLDivElement;
