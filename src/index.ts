@@ -30,7 +30,7 @@ const cameraInitSmartphoneSupport = async () => {
       .getUserMedia({
         audio: false,
         video: {
-          deviceId: '09DC87A1594033FE3A45B20E33B178C9ABBE21CD', // s.value,
+          deviceId: s.value,
         },
       })
       .then(async (v) => {
