@@ -37,6 +37,7 @@ const cameraInitSmartphoneSupport = async () => {
         },
       })
       .then((v) => {
+        window.alert('aaaa');
         const d = document.getElementById('now') as HTMLDivElement;
         let f = '';
         if (d) {
