@@ -36,7 +36,7 @@ const cameraInitSmartphoneSupport = async () => {
           // height: { ideal: 1080 },
         },
       })
-      .then((v) => {
+      .then(async (v) => {
         window.alert('aaaa');
         const d = document.getElementById('now') as HTMLDivElement;
         let f = '';
@@ -51,6 +51,25 @@ const cameraInitSmartphoneSupport = async () => {
           mem = v;
           video.srcObject = v;
         }
+
+        const enumerate = await navigator.mediaDevices.enumerateDevices();
+        const dd = document.getElementById('data') as HTMLDivElement;
+        s.innerHTML = '';
+        let ff = '';
+        if (dd) {
+          for (const k of enumerate) {
+            if (k.kind === 'videoinput') {
+              ff += '##############\n';
+              ff += `deviceId: ${k.deviceId}\n`;
+              ff += `groupId: ${k.groupId}\n`;
+              ff += `label: ${k.label}\n`;
+              ff += '##############\n';
+
+              s.innerHTML += `<option value=${k.deviceId}>${k.label}</option>`;
+            }
+          }
+        }
+        dd.innerText = ff;
       })
       .catch((err) => {
         const d = document.getElementById('err') as HTMLDivElement;
