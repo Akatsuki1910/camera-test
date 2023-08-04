@@ -31,7 +31,7 @@ const cameraInitSmartphoneSupport = async () => {
         audio: false,
         video: {
           // deviceId: s.value,
-          facingMode:'user'
+          facingMode: 'environment',
         },
       })
       .then((v) => {
